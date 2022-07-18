@@ -1,13 +1,22 @@
 class TicTacToe:
     def __init__(self):
-        # self.boardGame = [["-" for _ in range(3)] for _ in range(3)]
+        self.boardGame = [["-" for _ in range(3)] for _ in range(3)]
 
-        self.boardGame = [["1", "2", "O"], ["4", "O", "6"], ["O", "8", "9"]]
         self.J1 = "X"
         self.J2 = "O"
 
-    def game(self):
-        ...
+    def launch_game(self):
+        while not (self.is_winner(self.J1) or self.is_winner(self.J2)):
+            self.show_game()
+            self.play(self.J1)
+            if self.is_winner(self.J1):
+                print("J1 win !")
+                break
+            self.show_game()
+            self.play(self.J2)
+            if self.is_winner(self.J2):
+                print("J2 win !")
+                break
 
     def show_game(self):
         print("-" * 13)
