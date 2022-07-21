@@ -1,8 +1,12 @@
+"""
+THIS AI IS BASED ON WHICH GAME HAS PERMITTED A WIN OR A LOOSE
+IT DOESN'T TAKE CONSIDERATION OF WHICH STEPS
+"""
+
 import copy
 import random
 
 import numpy as np
-import pandas as pd
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -23,16 +27,16 @@ def get_all_available_positions():
 class AI(TicTacToe):
     def __init__(self):
         super().__init__()
-        self.current_history = []
-        self.history_all_games = []
         self.clf = DecisionTreeClassifier(criterion="entropy", random_state=1, max_depth=6)
         self.saved_bg, self.labels = [], []
         self.is_ai_trained = False
+        self.way_to_win, self.config = [], []
 
     def play_ai(self, show_plateau):
         available_positions = get_all_available_positions()
         random.shuffle(available_positions)
         index = 0
+        self.way_to_win = []
         while not self.is_winner(self.J1) and not self.is_winner(self.J2) and index < len(available_positions) - 1:
             if self.is_ai_trained:
                 # AI
@@ -47,6 +51,7 @@ class AI(TicTacToe):
             else:
                 self.play(available_positions[index], self.J1, show_plateau=show_plateau)
                 index += 1
+
                 self.play(available_positions[index], self.J2, show_plateau=show_plateau)
                 index += 1
         return self.is_winner(self.J1), self.is_winner(self.J2)
