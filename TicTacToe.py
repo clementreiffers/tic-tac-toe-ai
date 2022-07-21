@@ -7,11 +7,11 @@ class TicTacToe:
         self.board_game = []
         self.init_board_game()
 
-        self.J1 = "X"
-        self.J2 = "O"
+        self.J1 = 1
+        self.J2 = 2
 
     def init_board_game(self):
-        self.board_game = [["-" for _ in range(3)] for _ in range(3)]
+        self.board_game = [[0 for _ in range(3)] for _ in range(3)]
 
     def launch_game(self):
         while not (self.is_winner(self.J1) or self.is_winner(self.J2)):
@@ -45,10 +45,7 @@ class TicTacToe:
             [[line[-column - 1] for column, line in enumerate(self.board_game)]], player
         )
         return (
-            is_line_winner
-            or is_column_winner
-            or is_left_to_right_diagonal_winner
-            or is_right__to_left_diagonal_winner
+            is_line_winner or is_column_winner or is_left_to_right_diagonal_winner or is_right__to_left_diagonal_winner
         )
 
     def play_human(self, player):
@@ -56,15 +53,14 @@ class TicTacToe:
         while not playable:
             x = int(input("give x coordinate between 0 and 2 \n>>>"))
             y = int(input("give y coordinate between 0 and 2 \n>>>"))
-            playable = self.play(x, y, player)
+            playable = self.play((x, y), player)
 
-    def play(self, x, y, player):
-        playable = 0 <= x <= 2 and 0 <= y <= 2 and self.board_game[x][y] == "-"
+    def play(self, coord, player, show_plateau=True):
+        x, y = coord
+        playable = 0 <= x <= 2 and 0 <= y <= 2 and self.board_game[x][y] == 0
         if not playable:
-            print(
-                f"NOT PLAYABLE : you must give (x, y) between 0 and 2 you played ({x}, {y})"
-            )
+            print(f"NOT PLAYABLE : you must give (x, y) between 0 and 2 you played ({x}, {y})") if show_plateau else ...
         else:
             self.board_game[x][y] = player
-        self.show_game()
+        self.show_game() if show_plateau else ...
         return playable
