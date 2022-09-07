@@ -7,4 +7,5 @@ tic_tac_toe.launch_game()
 """
 
 AI = AI()
-AI.play_against_ai()
+AI.launch_game()
+# AI.play_against_ai()
