@@ -5,6 +5,8 @@ VOID: str = "-"
 J1: str = "X"
 J2: str = "O"
 
+MODEL_FILENAME: str = "model.sav"
+
 PLATEAU_TYPE = list[list[str]]
 AV_POSITION_TYPE = list[list[int]]
 COORD_TYPE = list[int]
