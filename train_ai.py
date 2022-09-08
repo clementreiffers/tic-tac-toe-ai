@@ -48,8 +48,9 @@ def train_ai_j1():
 
             coord: COORD_TYPE = playable_pos[-1]
 
-            temp_his_coord.append(coord)
-            temp_his_pos.append(vectorize_boardgame(bg))
+            if vectorize_boardgame(bg) != "-,-,-,-,-,-,-,-,-":
+                temp_his_coord.append(coord)
+                temp_his_pos.append(vectorize_boardgame(bg))
 
             bg = play(player, coord, bg)
 
